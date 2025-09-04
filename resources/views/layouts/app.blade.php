@@ -10,12 +10,28 @@
         .sidebar { background-color: #343a40; color: white; min-height: 100vh; padding-top: 2rem; }
         .sidebar .nav-link { color: #adb5bd; transition: color 0.3s; }
         .sidebar .nav-link:hover { color: white; }
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -250px;
+                width: 250px;
+                transition: all 0.3s;
+                z-index: 1000;
+            }
+            .sidebar.active {
+                left: 0;
+            }
+            main {
+                margin-left: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-md-2 d-none d-md-block sidebar">
+            <nav class="col-md-2 d-md-block sidebar">
                 <div class="sidebar-sticky">
                     <h4 class="text-white text-center mb-4">Menú Principal</h4>
                     <ul class="nav flex-column">
