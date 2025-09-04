@@ -26,12 +26,27 @@
                 margin-left: 0;
             }
         }
+        .navbar-toggler {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1001;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .navbar-toggler {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
+    <button class="navbar-toggler btn btn-primary" type="button" id="sidebarToggle">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-md-2 d-md-block sidebar">
+            <nav class="col-md-2 d-md-block sidebar" id="sidebar">
                 <div class="sidebar-sticky">
                     <h4 class="text-white text-center mb-4">Menú Principal</h4>
                     <ul class="nav flex-column">
@@ -67,5 +82,10 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
