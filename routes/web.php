@@ -38,11 +38,19 @@ Route::middleware('auth')->group(function () {
 
     // Rutas para el Módulo de Clientes (Acceso de Vendedor y Administrador)
     Route::middleware([CheckRole::class.':Administrador,Vendedor'])->group(function () {
-        Route::resource('clientes', ClienteController::class);
+        // Vendedores y Administradores pueden ver y crear
+        Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index');
+        Route::get('clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
+        Route::post('clientes', [ClienteController::class, 'store'])->name('clientes.store');
+    });
+    // Solo Administradores pueden editar y eliminar clientes
+    Route::middleware([CheckRole::class.':Administrador'])->group(function () {
+        Route::get('clientes/{cliente}/edit', [ClienteController::class, 'edit'])->name('clientes.edit');
+        Route::put('clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
+        Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
     });
 
-    // Rutas para el Módulo de Ventas (¡Orden Importante!)
-    // La ruta de historial va ANTES de la ruta de recurso para evitar el conflicto
+    // Rutas para el Módulo de Ventas (Acceso de Vendedor y Administrador)
     Route::middleware([CheckRole::class.':Administrador,Vendedor'])->group(function () {
         Route::get('/ventas/historial', [VentaController::class, 'history'])->name('ventas.history');
         Route::post('/ventas/{venta}/anular', [VentaController::class, 'anular'])->name('ventas.anular');

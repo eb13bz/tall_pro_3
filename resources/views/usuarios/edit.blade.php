@@ -6,7 +6,7 @@
 </div>
 
 @if ($user)
-    <form action="{{ route('usuarios.update', $user) }}" method="POST">
+    <form action="{{ route('usuarios.update', $user->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="mb-3">

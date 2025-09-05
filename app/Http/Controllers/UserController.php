@@ -53,7 +53,7 @@ class UserController extends Controller
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente.');
     }
 
-/**
+   /**
  * Muestra el formulario para editar un usuario existente.
  */
 public function edit($id) // <-- Cambiado a recibir solo el ID
@@ -61,6 +61,7 @@ public function edit($id) // <-- Cambiado a recibir solo el ID
     $user = User::findOrFail($id); // <-- Busca el usuario de forma explícita
     return view('usuarios.edit', compact('user'));
 }
+
     /**
      * Actualiza un usuario en la base de datos.
      */
@@ -86,6 +87,7 @@ public function edit($id) // <-- Cambiado a recibir solo el ID
         ]);
 
         $user->update([
+            'name' => $request->nombre_completo,
             'nombre_completo' => $request->nombre_completo,
             'nombre_de_usuario' => $request->nombre_de_usuario,
             'email' => $request->email,

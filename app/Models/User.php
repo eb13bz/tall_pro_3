@@ -19,7 +19,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'nombre_completo', // <-- CORRECCIÓN: Agregar esta línea
+        'nombre_completo',
         'nombre_de_usuario',
         'telefono',
         'rol_asignado',

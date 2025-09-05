@@ -3,8 +3,9 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\Authenticate;
 
 class Kernel extends HttpKernel
 {
@@ -45,6 +46,6 @@ class Kernel extends HttpKernel
     protected $middlewareAliases = [
         'auth' => Authenticate::class,
         'guest' => RedirectIfAuthenticated::class,
-        // El alias 'role' ha sido eliminado para evitar conflictos
+        'role' => CheckRole::class, // <-- El alias que estamos usando
     ];
 }
